@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions targetNamespace="http://opentosca.org/servicetemplates" id="winery-defs-for_otsteIgeneral-Management_Features_Example" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:selfservice="http://www.eclipse.org/winery/model/selfservice" xmlns:ns0="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:testwineryopentoscaorg="http://test.winery.opentosca.org">
+    <ServiceTemplate name="Management_Features_Example" targetNamespace="http://opentosca.org/servicetemplates" id="Management_Features_Example">
+        <TopologyTemplate>
+            <NodeTemplate name="Public-Cloud" minInstances="1" maxInstances="1" type="otntyIgeneral:AWS_w1-wip1" id="AWS" ns0:x="511" ns0:y="560" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <AWSAccessKey>get_input: AWSAccessKey</AWSAccessKey>
+                        <AWSSecretKey>get_input: AWSSecretKey</AWSSecretKey>
+                        <AWSRegion>us-east-1</AWSRegion>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="PaaS" minInstances="1" maxInstances="1" type="otntyIgeneral:ElasticBeanstalk_w1-wip1" id="ElasticBeanstalk" ns0:x="330" ns0:y="363" xmlns:otntyIgeneral="http://opentosca.org/nodetypes"/>
+            <NodeTemplate name="Order-Queue" minInstances="1" maxInstances="1" type="otntyIgeneral:SQS-Queue_w1-wip1" id="SQS-Queue" ns0:x="698" ns0:y="219" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <QueueName/>
+                        <QueueUrl/>
+                        <FifoQueue>false</FifoQueue>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="SQS" minInstances="1" maxInstances="1" type="otntyIgeneral:SimpleQueueService_w1-wip1" id="SimpleQueueService" ns0:x="698" ns0:y="365" xmlns:otntyIgeneral="http://opentosca.org/nodetypes"/>
+            <NodeTemplate name="Order-App" minInstances="1" maxInstances="1" type="otntyIgeneral:Beanstalk-App_w1-wip1" id="Beanstalk-App" ns0:x="331" ns0:y="219" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <Environment>64bit Amazon Linux 2018.03 v2.8.3 running Java 8</Environment>
+                        <AppUrl/>
+                        <AppName/>
+                    </Properties>
+                </Properties>
+                <DeploymentArtifacts>
+                    <DeploymentArtifact name="Order-App-DA" artifactType="otatyIgeneral:JAR" artifactRef="otateIgeneral:Order-App-DA" xmlns:otateIgeneral="http://opentosca.org/artifacttemplates" xmlns:otatyIgeneral="http://opentosca.org/artifacttypes"/>
+                </DeploymentArtifacts>
+            </NodeTemplate>
+            <NodeTemplate name="Order-Processor-VM" minInstances="1" maxInstances="1" type="otntyIgeneral:Ubuntu-VM_18.04-w1" id="Ubuntu-VM_18.04-w2" ns0:x="1084" ns0:y="506" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <VMIP/>
+                        <VMInstanceID/>
+                        <VMType>m1.large</VMType>
+                        <VMUserName>ubuntu</VMUserName>
+                        <VMUserPassword>N/A</VMUserPassword>
+                        <VMPrivateKey>get_input: VMPrivateKey</VMPrivateKey>
+                        <VMPublicKey>N/A</VMPublicKey>
+                        <VMKeyPairName>get_input: VMKeyPairName</VMKeyPairName>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="Java8" minInstances="1" maxInstances="1" type="otntyIgeneral:Java8" id="Java8" ns0:x="1270" ns0:y="355" xmlns:otntyIgeneral="http://opentosca.org/nodetypes"/>
+            <NodeTemplate name="Private-Cloud" minInstances="1" maxInstances="1" type="otntyIgeneral:OpenStack-Liberty-12_w1-wip1" id="OpenStack-Liberty-12" ns0:x="1307" ns0:y="713" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <HypervisorEndpoint>asflexsm.informatik.uni-stuttgart.de</HypervisorEndpoint>
+                        <HypervisorTenantID>SmartServices</HypervisorTenantID>
+                        <HypervisorUserName>get_input: OpenStackUser</HypervisorUserName>
+                        <HypervisorUserPassword>get_input: OpenStackPass</HypervisorUserPassword>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="Order-Processor" minInstances="1" maxInstances="1" type="otntyIgeneral:Order-Processor_w1-wip1" id="Order-Processor" ns0:x="1070" ns0:y="218" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <DeploymentArtifacts>
+                    <DeploymentArtifact name="Order-Processor-DA" artifactType="otatyIgeneral:JAR" artifactRef="otateIgeneral:Order-Processor-DA" xmlns:otateIgeneral="http://opentosca.org/artifacttemplates" xmlns:otatyIgeneral="http://opentosca.org/artifacttypes"/>
+                </DeploymentArtifacts>
+            </NodeTemplate>
+            <NodeTemplate name="Database-VM" minInstances="1" maxInstances="1" type="otntyIgeneral:Ubuntu-VM_18.04-w1" id="Ubuntu-VM_18.04-w2_2" ns0:x="1528" ns0:y="504" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <VMIP/>
+                        <VMInstanceID/>
+                        <VMType>m1.medium</VMType>
+                        <VMUserName>ubuntu</VMUserName>
+                        <VMUserPassword>N/A</VMUserPassword>
+                        <VMPrivateKey>get_input: VMPrivateKey</VMPrivateKey>
+                        <VMPublicKey>N/A</VMPublicKey>
+                        <VMKeyPairName>get_input: VMKeyPairName</VMKeyPairName>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="DBMS" minInstances="1" maxInstances="1" type="otntyIgeneral:MySQL-DBMS_5.7-w1" id="MySQL-DBMS_5.7-w2" ns0:x="1529" ns0:y="346" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <DBMSUser>root</DBMSUser>
+                        <DBMSPassword>get_input: DBMSPassword</DBMSPassword>
+                        <DBMSPort>3306</DBMSPort>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="Order-DB" minInstances="1" maxInstances="1" type="otntyIgeneral:MySQL-DB_w1-wip1" id="MySQL-DB" ns0:x="1530" ns0:y="213" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:nodetypes="http://opentosca.org/nodetypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <DBName>OrderDB</DBName>
+                        <DBUser>get_input: DBUser</DBUser>
+                        <DBPassword>get_input: DBPassword</DBPassword>
+                    </Properties>
+                </Properties>
+            </NodeTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_0" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="ElasticBeanstalk"/>
+                <TargetElement ref="AWS"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_1" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="SimpleQueueService"/>
+                <TargetElement ref="AWS"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_2" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="SQS-Queue"/>
+                <TargetElement ref="SimpleQueueService"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_3" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Beanstalk-App"/>
+                <TargetElement ref="ElasticBeanstalk"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="ConnectsTo" type="ToscaBaseTypes:ConnectsTo" id="con_ConnectsTo_0" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <ChannelType/>
+                    </Properties>
+                </Properties>
+                <SourceElement ref="Beanstalk-App"/>
+                <TargetElement ref="SQS-Queue"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_4" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Ubuntu-VM_18.04-w2"/>
+                <TargetElement ref="OpenStack-Liberty-12"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_5" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Java8"/>
+                <TargetElement ref="Ubuntu-VM_18.04-w2"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="ConnectsTo" type="ToscaBaseTypes:ConnectsTo" id="con_ConnectsTo_1" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <ChannelType/>
+                    </Properties>
+                </Properties>
+                <SourceElement ref="Order-Processor"/>
+                <TargetElement ref="SQS-Queue"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_6" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Order-Processor"/>
+                <TargetElement ref="Ubuntu-VM_18.04-w2"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="DependsOn" type="ToscaBaseTypes:DependsOn" id="con_DependsOn_0" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Order-Processor"/>
+                <TargetElement ref="Java8"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_7" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="Ubuntu-VM_18.04-w2_2"/>
+                <TargetElement ref="OpenStack-Liberty-12"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_8" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="MySQL-DBMS_5.7-w2"/>
+                <TargetElement ref="Ubuntu-VM_18.04-w2_2"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="HostedOn" type="ToscaBaseTypes:HostedOn" id="con_HostedOn_9" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <SourceElement ref="MySQL-DB"/>
+                <TargetElement ref="MySQL-DBMS_5.7-w2"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="ConnectsTo" type="ToscaBaseTypes:ConnectsTo" id="con_ConnectsTo_2" xmlns:ToscaBaseTypes="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                <Properties>
+                    <Properties xmlns="http://www.example.org" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                        <ChannelType/>
+                    </Properties>
+                </Properties>
+                <SourceElement ref="Order-Processor"/>
+                <TargetElement ref="MySQL-DB"/>
+            </RelationshipTemplate>
+        </TopologyTemplate>
+    </ServiceTemplate>
+</Definitions>

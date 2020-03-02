@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions targetNamespace="http://opentosca.org/artifacttemplates" id="winery-defs-for_otateIgeneral-Beanstalk-App-IA" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:selfservice="http://www.eclipse.org/winery/model/selfservice" xmlns:ns0="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:testwineryopentoscaorg="http://test.winery.opentosca.org">
+    <ArtifactTemplate name="Beanstalk-App-IA" type="otatyIgeneral:WAR" id="Beanstalk-App-IA" xmlns:otatyIgeneral="http://opentosca.org/artifacttypes">
+        <Properties>
+            <WSProperties xmlns="http://www.opentosca.org/artifacttypes" xmlns:artifacttypes="http://opentosca.org/artifacttypes" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12">
+                <ServiceEndpoint>/services/org_opentosca_nodetypes_ElasticBeanstalk__org_opentosca_interfaces_pattern_containerPort</ServiceEndpoint>
+                <PortType>{http://opentosca.org/nodetypes}org_opentosca_nodetypes_ElasticBeanstalk__org_opentosca_interfaces_pattern_container</PortType>
+                <InvocationType>SOAP/HTTP</InvocationType>
+            </WSProperties>
+        </Properties>
+        <ArtifactReferences>
+            <ArtifactReference reference="artifacttemplates/http%253A%252F%252Fopentosca.org%252Fartifacttemplates/Beanstalk-App-IA/files/org_opentosca_nodetypes_ElasticBeanstalk__org_opentosca_interfaces_pattern_container.war"/>
+            <ArtifactReference reference="artifacttemplates/http%253A%252F%252Fopentosca.org%252Fartifacttemplates/Beanstalk-App-IA/files/org_opentosca_nodetypes_ElasticBeanstalk__org_opentosca_interfaces_pattern_container.zip"/>
+        </ArtifactReferences>
+    </ArtifactTemplate>
+</Definitions>

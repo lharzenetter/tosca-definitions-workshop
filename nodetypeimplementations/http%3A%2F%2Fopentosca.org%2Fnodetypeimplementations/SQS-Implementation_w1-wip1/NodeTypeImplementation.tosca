@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions targetNamespace="http://opentosca.org/nodetypeimplementations" id="winery-defs-for_otntyiIgeneral-SQS-Implementation_w1-wip1" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:selfservice="http://www.eclipse.org/winery/model/selfservice" xmlns:ns0="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:testwineryopentoscaorg="http://test.winery.opentosca.org">
+    <NodeTypeImplementation targetNamespace="http://opentosca.org/nodetypeimplementations" name="SQS-Implementation_w1-wip1" abstract="no" final="no" nodeType="otntyIgeneral:SimpleQueueService_w1-wip1" xmlns:otntyIgeneral="http://opentosca.org/nodetypes">
+        <ImplementationArtifacts>
+            <ImplementationArtifact name="SQS-Container-Pattern" interfaceName="http://opentosca.org/interfaces/pattern/container" artifactType="otatyIgeneral:WAR" artifactRef="otateIgeneral:SQS-Container-IA" xmlns:otateIgeneral="http://opentosca.org/artifacttemplates" xmlns:otatyIgeneral="http://opentosca.org/artifacttypes"/>
+        </ImplementationArtifacts>
+    </NodeTypeImplementation>
+</Definitions>

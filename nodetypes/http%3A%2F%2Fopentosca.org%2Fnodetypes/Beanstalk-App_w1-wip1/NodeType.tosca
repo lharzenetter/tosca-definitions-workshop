@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions targetNamespace="http://opentosca.org/nodetypes" id="winery-defs-for_otntyIgeneral-Beanstalk-App_w1-wip1" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:selfservice="http://www.eclipse.org/winery/model/selfservice" xmlns:ns0="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:testwineryopentoscaorg="http://test.winery.opentosca.org">
+    <Import namespace="http://opentosca.org/nodetypes/propertiesdefinition/winery" location="../imports/http%253A%252F%252Fwww.w3.org%252F2001%252FXMLSchema/http%253A%252F%252Fopentosca.org%252Fnodetypes%252Fpropertiesdefinition%252Fwinery/properties/properties.xsd" importType="http://www.w3.org/2001/XMLSchema" ns0:wpd="true"/>
+    <NodeType name="Beanstalk-App_w1-wip1" abstract="no" final="no" targetNamespace="http://opentosca.org/nodetypes">
+        <ns0:PropertiesDefinition elementname="properties" namespace="http://opentosca.org/nodetypes/propertiesdefinition/winery">
+            <ns0:properties>
+                <ns0:key>Environment</ns0:key>
+                <ns0:type>xsd:string</ns0:type>
+            </ns0:properties>
+            <ns0:properties>
+                <ns0:key>AppUrl</ns0:key>
+                <ns0:type>xsd:string</ns0:type>
+            </ns0:properties>
+            <ns0:properties>
+                <ns0:key>AppName</ns0:key>
+                <ns0:type>xsd:string</ns0:type>
+            </ns0:properties>
+        </ns0:PropertiesDefinition>
+        <Interfaces>
+            <Interface name="http://www.example.com/interfaces/lifecycle">
+                <Operation name="start">
+                    <InputParameters>
+                        <InputParameter name="AWSAccessKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSSecretKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSRegion" type="xsd:string" required="yes"/>
+                        <InputParameter name="Environment" type="xsd:string" required="yes"/>
+                    </InputParameters>
+                    <OutputParameters>
+                        <OutputParameter name="AppUrl" type="xsd:string" required="yes"/>
+                        <OutputParameter name="AppName" type="xsd:string" required="yes"/>
+                    </OutputParameters>
+                </Operation>
+                <Operation name="stop">
+                    <InputParameters>
+                        <InputParameter name="AWSAccessKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSSecretKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSRegion" type="xsd:string" required="yes"/>
+                        <InputParameter name="AppName" type="xsd:string" required="yes"/>
+                    </InputParameters>
+                    <OutputParameters>
+                        <OutputParameter name="Result" type="xsd:string" required="yes"/>
+                    </OutputParameters>
+                </Operation>
+            </Interface>
+            <Interface name="http://opentosca.org/interfaces/connections/nonInterruptive">
+                <Operation name="connectTo">
+                    <InputParameters>
+                        <InputParameter name="AWSAccessKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSSecretKey" type="xsd:string" required="yes"/>
+                        <InputParameter name="AWSRegion" type="xsd:string" required="yes"/>
+                        <InputParameter name="SOURCE_AppName" type="xsd:String" required="yes"/>
+                        <InputParameter name="TARGET_QueueName" type="xsd:String" required="yes"/>
+                    </InputParameters>
+                    <OutputParameters>
+                        <OutputParameter name="Result" type="xsd:string" required="yes"/>
+                    </OutputParameters>
+                </Operation>
+            </Interface>
+        </Interfaces>
+    </NodeType>
+</Definitions>
