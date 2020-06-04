@@ -17,7 +17,7 @@
                         <ContainerPort>get_input:BackendPort</ContainerPort>
                         <ContainerID/>
                         <ContainerIP/>
-                        <ImageID>ubuntu:latest</ImageID>
+                        <ImageID>ubuntu:18.04</ImageID>
                         <ContainerMountPath/>
                         <HostMountFiles/>
                     </Properties>
@@ -42,7 +42,7 @@
                         <ContainerPort>80</ContainerPort>
                         <ContainerID/>
                         <ContainerIP/>
-                        <ImageID>ubuntu:latest</ImageID>
+                        <ImageID>ubuntu:18.04</ImageID>
                         <ContainerMountPath/>
                         <HostMountFiles/>
                     </Properties>
